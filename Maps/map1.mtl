@@ -1,0 +1,5 @@
+newmtl FLATS/dntile07
+map_Kd textures\FLATS\dntile07.png
+
+newmtl __TB_empty
+
