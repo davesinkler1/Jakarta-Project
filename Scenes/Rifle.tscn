@@ -1,0 +1,80 @@
+[gd_scene load_steps=10 format=3 uid="uid://d3lyhwxoxgq6u"]
+
+[ext_resource type="Texture2D" uid="uid://c65v16aks4vjl" path="res://Sprites/rifle_sprites/mosca0.png" id="1"]
+[ext_resource type="Texture2D" uid="uid://idn620boeae" path="res://Sprites/rifle_sprites/AnimFrames/f_afire.png" id="2"]
+[ext_resource type="Texture2D" uid="uid://b7olmbw15gjbh" path="res://Sprites/rifle_sprites/AnimFrames/f_rfire01.png" id="3"]
+[ext_resource type="Texture2D" uid="uid://b1mi37iaeqqek" path="res://Sprites/rifle_sprites/AnimFrames/f_rfire03.png" id="4"]
+[ext_resource type="Texture2D" uid="uid://s77slqoqiaua" path="res://Sprites/rifle_sprites/AnimFrames/f_fire01.png" id="5"]
+[ext_resource type="Script" path="res://Scripts/Gun.gd" id="6"]
+[ext_resource type="Texture2D" uid="uid://c1dp5fhbuaewg" path="res://Sprites/rifle_sprites/AnimFrames/f_fire02.png" id="7"]
+[ext_resource type="Texture2D" uid="uid://kwc1pma3b4r" path="res://Sprites/rifle_sprites/AnimFrames/f_rfire02.png" id="8"]
+
+[sub_resource type="SpriteFrames" id="1"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2")
+}],
+"loop": false,
+"name": &"shoot",
+"speed": 5.0
+}]
+
+[node name="Rifle" type="Node3D"]
+script = ExtResource("6")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -40.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="GunSprite" type="AnimatedSprite2D" parent="CanvasLayer/Control"]
+position = Vector2(-456, -54)
+rotation = 3.14159
+scale = Vector2(2, 2)
+sprite_frames = SubResource("1")
+animation = &"shoot"
+frame = 4
+speed_scale = 2.5
+flip_h = true
+flip_v = true
+
+[node name="GunRays" type="Node3D" parent="."]
+
+[node name="RayCast3D" type="RayCast3D" parent="GunRays"]
+target_position = Vector3(0, 0, -40)

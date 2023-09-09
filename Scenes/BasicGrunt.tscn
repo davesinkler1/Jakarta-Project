@@ -1,0 +1,141 @@
+[gd_scene load_steps=17 format=3 uid="uid://bthf5inhryh2v"]
+
+[ext_resource type="Texture2D" uid="uid://bj43x43nqux66" path="res://Sprites/cultists/culth0.png" id="1"]
+[ext_resource type="Texture2D" uid="uid://cau8cccfym1sp" path="res://Sprites/cultists/culta1c1.png" id="2"]
+[ext_resource type="Script" path="res://Scenes/head.gd" id="2_phsck"]
+[ext_resource type="Texture2D" uid="uid://d1brertdfbw0c" path="res://Sprites/cultists/cultb1d1.png" id="3"]
+[ext_resource type="Texture2D" uid="uid://b5wnnoh2avc0u" path="res://Sprites/cultists/culte1.png" id="4"]
+[ext_resource type="Texture2D" uid="uid://dy0wxuju5twft" path="res://Sprites/cultists/cultf1.png" id="5"]
+[ext_resource type="Texture2D" uid="uid://bdr6fm75g8lj1" path="res://Sprites/cultists/culti0.png" id="6"]
+[ext_resource type="Texture2D" uid="uid://cp30q65dpwwo1" path="res://Sprites/cultists/cultk0.png" id="7"]
+[ext_resource type="Texture2D" uid="uid://bu3myr6lk8jcd" path="res://Sprites/cultists/cultg8.png" id="8"]
+[ext_resource type="Texture2D" uid="uid://bgrgpfsgifttn" path="res://Sprites/cultists/cultl0.png" id="9"]
+[ext_resource type="Texture2D" uid="uid://bo4xn4qaauf2" path="res://Sprites/cultists/cultj0.png" id="10"]
+[ext_resource type="Script" path="res://Scripts/BasicGrunt.gd" id="11"]
+
+[sub_resource type="BoxShape3D" id="3"]
+size = Vector3(1.88847, 1.54933, 1.74384)
+
+[sub_resource type="CapsuleShape3D" id="1"]
+radius = 0.319101
+height = 1.34239
+
+[sub_resource type="SpriteFrames" id="2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9")
+}],
+"loop": false,
+"name": &"die",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8")
+}],
+"loop": false,
+"name": &"hit",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2")
+}],
+"loop": false,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5")
+}],
+"loop": false,
+"name": &"shoot",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3")
+}],
+"loop": false,
+"name": &"walking",
+"speed": 5.0
+}]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_kgs71"]
+radius = 10.6734
+
+[node name="BGSpatial" type="Node3D"]
+
+[node name="BasicGrunt" type="CharacterBody3D" parent="." groups=["Enemy"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.586107, 0)
+script = ExtResource("11")
+
+[node name="head" type="CollisionShape3D" parent="BasicGrunt"]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0.0397463, 1.73169, -0.0266038)
+shape = SubResource("3")
+script = ExtResource("2_phsck")
+
+[node name="Visual" type="RayCast3D" parent="BasicGrunt"]
+target_position = Vector3(0, 5, -20)
+collide_with_areas = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BasicGrunt"]
+transform = Transform3D(1.5, 0, 0, 0, 1.49928, 0.0465668, 0, -0.0465668, 1.49928, 0.0522301, 0.52579, 0.00960231)
+shape = SubResource("1")
+
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="BasicGrunt"]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0, -0.649977, 0)
+centered = false
+offset = Vector2(-15.96, 0)
+billboard = 2
+sprite_frames = SubResource("2")
+animation = &"idle"
+
+[node name="Timer" type="Timer" parent="BasicGrunt"]
+autostart = true
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="BasicGrunt"]
+
+[node name="Aural" type="Area3D" parent="BasicGrunt"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BasicGrunt/Aural"]
+shape = SubResource("CylinderShape3D_kgs71")
+
+[node name="ShootTimer" type="Timer" parent="BasicGrunt"]
+wait_time = 2.5
+autostart = true
+
+[connection signal="body_entered" from="BasicGrunt/Aural" to="BasicGrunt" method="_on_aural_body_entered"]
+[connection signal="timeout" from="BasicGrunt/ShootTimer" to="BasicGrunt" method="_on_shoot_timer_timeout"]

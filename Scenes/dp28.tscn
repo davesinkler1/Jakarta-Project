@@ -1,0 +1,79 @@
+[gd_scene load_steps=9 format=3 uid="uid://bx0qmslg0rlyt"]
+
+[ext_resource type="Texture2D" uid="uid://0o0w4gmh4r45" path="res://Sprites/dp28_sprites/AnimSprites/dp_afire01.png" id="1"]
+[ext_resource type="Texture2D" uid="uid://dyvi1pqsgd530" path="res://Sprites/dp28_sprites/dp29b0.png" id="2"]
+[ext_resource type="Texture2D" uid="uid://chigpg8l8vk37" path="res://Sprites/dp28_sprites/AnimSprites/dp_afire02.png" id="3"]
+[ext_resource type="Texture2D" uid="uid://cy1i7ws83iwai" path="res://Sprites/dp28_sprites/dp29a0.png" id="4"]
+[ext_resource type="Texture2D" uid="uid://bmi3w6xhhwdck" path="res://Sprites/dp28_sprites/AnimSprites/dp_fire02.png" id="5"]
+[ext_resource type="Script" path="res://Scripts/Gun.gd" id="6"]
+[ext_resource type="Texture2D" uid="uid://by5lornaumayf" path="res://Sprites/dp28_sprites/AnimSprites/dp_fire01.png" id="7"]
+
+[sub_resource type="SpriteFrames" id="1"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("1")
+}],
+"loop": false,
+"name": &"shoot",
+"speed": 5.0
+}]
+
+[node name="DP28" type="Node3D"]
+script = ExtResource("6")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -40.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="GunSprite" type="AnimatedSprite2D" parent="CanvasLayer/Control"]
+position = Vector2(-122, -97)
+rotation = 3.14159
+scale = Vector2(2, 2)
+sprite_frames = SubResource("1")
+animation = &"shoot"
+frame = 2
+speed_scale = 4.0
+flip_h = true
+flip_v = true
+
+[node name="GunRays" type="Node3D" parent="."]
+
+[node name="RayCast3D" type="RayCast3D" parent="GunRays"]
+target_position = Vector3(0, 0, -20)
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.2
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

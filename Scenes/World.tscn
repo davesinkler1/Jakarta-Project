@@ -1,0 +1,52 @@
+[gd_scene load_steps=12 format=3 uid="uid://d2x505i1evr4y"]
+
+[ext_resource type="PackedScene" uid="uid://bnmogn0pi2mh7" path="res://Scenes/Player.tscn" id="1"]
+[ext_resource type="Script" path="res://Scenes/World.gd" id="1_2frro"]
+[ext_resource type="PackedScene" uid="uid://bnye801ftxd6h" path="res://Scenes/TestMap.tscn" id="2"]
+[ext_resource type="PackedScene" uid="uid://bthf5inhryh2v" path="res://Scenes/BasicGrunt.tscn" id="3"]
+[ext_resource type="PackedScene" uid="uid://dtebeov1ncuki" path="res://Scenes/hud.tscn" id="4"]
+[ext_resource type="PackedScene" uid="uid://5broygtpxden" path="res://Scenes/Pickup_scenes/ammo1.tscn" id="6_wliln"]
+[ext_resource type="PackedScene" uid="uid://b725akopk35ck" path="res://Scenes/Pickup_scenes/ammo2.tscn" id="7_q6rkk"]
+[ext_resource type="PackedScene" uid="uid://bd743ma5kb82e" path="res://Scenes/Pickup_scenes/medkit.tscn" id="8_hvca4"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_l6d85"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_hn3ub"]
+sky_material = SubResource("ProceduralSkyMaterial_l6d85")
+
+[sub_resource type="Environment" id="Environment_4bbve"]
+background_mode = 2
+sky = SubResource("Sky_hn3ub")
+tonemap_mode = 2
+glow_enabled = true
+
+[node name="World" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.322344, 0)
+script = ExtResource("1_2frro")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_4bbve")
+
+[node name="hud" parent="." instance=ExtResource("4")]
+
+[node name="TestMap" parent="." instance=ExtResource("2")]
+
+[node name="Player" parent="." instance=ExtResource("1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.589372, 0)
+
+[node name="CharacterBody3D" parent="." instance=ExtResource("3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.9576, 0.51098, -7.31496)
+
+[node name="ammo1" parent="." instance=ExtResource("6_wliln")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.77767, 0, -5.72704)
+
+[node name="ammo2" parent="." instance=ExtResource("7_q6rkk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.70446, -1.78814e-07, -7.89879)
+
+[node name="Medkit" parent="." instance=ExtResource("8_hvca4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.96303, 0, -8.44517)
+
+[node name="CharacterBody3D2" parent="." instance=ExtResource("3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26.4863, 0, -13.6595)

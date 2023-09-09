@@ -1,0 +1,23 @@
+[gd_scene load_steps=6 format=3 uid="uid://cfpkb28lbmir5"]
+
+[ext_resource type="PackedScene" uid="uid://dtebeov1ncuki" path="res://Scenes/hud.tscn" id="1_j6ywl"]
+[ext_resource type="PackedScene" uid="uid://bpmscyt17wugd" path="res://Maps/MapScene/map1.tscn" id="2_7we32"]
+[ext_resource type="PackedScene" uid="uid://bnmogn0pi2mh7" path="res://Scenes/Player.tscn" id="3_axlf2"]
+
+[sub_resource type="Environment" id="Environment_g4bxe"]
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_gcijf"]
+
+[node name="Level1" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_g4bxe")
+camera_attributes = SubResource("CameraAttributesPractical_gcijf")
+
+[node name="hud" parent="." instance=ExtResource("1_j6ywl")]
+
+[node name="Node3D" parent="." instance=ExtResource("2_7we32")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -19.2653, 0, -17.7262)
+
+[node name="Player" parent="." instance=ExtResource("3_axlf2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22.4481, 0.929722, -10.4459)

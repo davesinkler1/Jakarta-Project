@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://b725akopk35ck"]
+
+[ext_resource type="Texture2D" uid="uid://codygbo86bwjm" path="res://Sprites/Pickups/Supply Box/SPRITES/supba0.png" id="1_8sp2c"]
+[ext_resource type="Script" path="res://Scenes/Pickup_scenes/ammo2.gd" id="1_oovlp"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_bfsf0"]
+radius = 1.20367
+
+[node name="ammo2" type="Area3D"]
+script = ExtResource("1_oovlp")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(3.5, 0, 0, 0, 3.5, 0, 0, 0, 3.5, 0, 0.46184, 0)
+billboard = 2
+texture = ExtResource("1_8sp2c")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.46997, 0)
+shape = SubResource("SphereShape3D_bfsf0")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

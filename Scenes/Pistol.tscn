@@ -1,0 +1,72 @@
+[gd_scene load_steps=8 format=3 uid="uid://6yfoca50s8ri"]
+
+[ext_resource type="Texture2D" uid="uid://bvjkyio8bryii" path="res://Sprites/AngledGun/2pisd0.png" id="1"]
+[ext_resource type="Texture2D" uid="uid://1ndg52i6cybf" path="res://Sprites/AngledGun/2pisb0.png" id="2"]
+[ext_resource type="Texture2D" uid="uid://dx7cskm8jf6bu" path="res://Sprites/AngledGun/2pisc0.png" id="3"]
+[ext_resource type="Texture2D" uid="uid://dbl6er0qilack" path="res://Sprites/AngledGun/2pisf0.png" id="4"]
+[ext_resource type="Texture2D" uid="uid://dj5lge5ib15su" path="res://Sprites/AngledGun/2pisa0.png" id="5"]
+[ext_resource type="Script" path="res://Scripts/Gun.gd" id="6"]
+
+[sub_resource type="SpriteFrames" id="1"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("1")
+}],
+"loop": false,
+"name": &"shoot",
+"speed": 5.0
+}]
+
+[node name="Pistol" type="Node3D"]
+script = ExtResource("6")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -40.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="GunSprite" type="AnimatedSprite2D" parent="CanvasLayer/Control"]
+position = Vector2(-298, -48)
+rotation = 3.14159
+scale = Vector2(2, 2)
+sprite_frames = SubResource("1")
+animation = &"shoot"
+speed_scale = 3.0
+flip_h = true
+flip_v = true
+
+[node name="GunRays" type="Node3D" parent="."]
+
+[node name="RayCast3D" type="RayCast3D" parent="GunRays"]
+target_position = Vector3(0, 0, -20)
+collide_with_areas = true

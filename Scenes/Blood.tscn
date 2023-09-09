@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=2]
+
+[sub_resource type="StandardMaterial3D" id=1]
+vertex_color_is_srgb = true
+albedo_color = Color( 0.572549, 0.0862745, 0.0862745, 1 )
+
+[sub_resource type="BoxMesh" id=2]
+material = SubResource( 1 )
+size = Vector3( 0.1, 0.1, 0.1 )
+
+[node name="Blood" type="CPUParticles3D"]
+emitting = false
+amount = 21
+lifetime = 0.3
+one_shot = true
+explosiveness = 1.0
+mesh = SubResource( 2 )
+emission_shape = 2
+emission_box_extents = Vector3( 0, 0, 0 )
+flag_align_y = true
+spread = 180.0
+initial_velocity = 1.0
