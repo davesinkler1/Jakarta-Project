@@ -1,0 +1,16 @@
+[remap]
+
+importer="font_data_bmfont"
+type="FontFile"
+uid="uid://btv1o5wqq8kgj"
+path="res://.godot/imported/Doom.fnt-30985998e787ab6273b37daa00192b41.fontdata"
+
+[deps]
+
+source_file="res://font/Doom.fnt"
+dest_files=["res://.godot/imported/Doom.fnt-30985998e787ab6273b37daa00192b41.fontdata"]
+
+[params]
+
+fallbacks=[]
+compress=true
