@@ -1,0 +1,23 @@
+[gd_scene load_steps=6 format=3 uid="uid://bh6qaw0a3t8py"]
+
+[ext_resource type="PackedScene" uid="uid://dh1w36tc4fffo" path="res://TestLevel2.tscn" id="1"]
+[ext_resource type="PackedScene" uid="uid://bnmogn0pi2mh7" path="res://Scenes/Player.tscn" id="2"]
+[ext_resource type="PackedScene" uid="uid://bthf5inhryh2v" path="res://Scenes/BasicGrunt.tscn" id="3"]
+[ext_resource type="PackedScene" uid="uid://dtebeov1ncuki" path="res://Scenes/hud.tscn" id="4"]
+
+[sub_resource type="Environment" id="Environment_sq0n5"]
+
+[node name="World2" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_sq0n5")
+
+[node name="TestMap2" parent="." instance=ExtResource("1")]
+
+[node name="Player" parent="." instance=ExtResource("2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.3616, 0.000421405, -10.3095)
+
+[node name="Node3D" parent="." instance=ExtResource("3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.2585, 0.890022, -23.0006)
+
+[node name="hud" parent="." instance=ExtResource("4")]
